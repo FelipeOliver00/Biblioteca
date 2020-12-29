@@ -1,0 +1,76 @@
+﻿@model List<Livro>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Livros Listados</h1>
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
+<!--Criando link para cadastrar o livro-->
+<a asp-action="cadastrar" class="btn btn-outline-dark mb-2">Cadastrar Livro</a>
+
+<!--Tabelinha com loop pra cada livro-->
+<!--Vamos exibir as informações-->
+<table class="table table-striped table-dark">
+    <tr>
+        <th>Código</th>
+        <th>Autor</th>
+        <th>Título</th>
+        <th>Editora</th>
+        <th>DT Publicação</th>
+        <th>Tipo</th>
+        <th>Condição</th>
+        <th>Preço</th>
+        <th></th>
+    </tr>
+    @foreach (var liv in Model)
+    {
+        <tr>
+            <td>@liv.Codigo</td>
+            <td>@liv.Autor</td>
+            <td>@liv.Titulo</td>
+            <td>@liv.Editora</td>
+            <td>@liv.DataPublicacao.ToShortDateString()</td>
+            <td>@liv.Tipo</td>
+            <td>@(liv.Condicao?"Velho":"Novo")</td>
+            <td>@liv.Preco</td>
+            <td>
+                <a asp-action="Editar" asp-route-id="@liv.Codigo">Atualizar</a>
+                <button onclick="livroId.value = @liv.Codigo" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Excluir
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmarção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza da exclusão do Livro?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="remover">
+                    <input type="hidden" name="id" id="livroId" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-primary">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

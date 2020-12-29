@@ -1,0 +1,33 @@
+﻿@model Livro
+
+
+<div class="form-group">
+    <label asp-for="Autor"></label>
+    <input asp-for="Autor" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="Titulo"></label>
+    <input asp-for="Titulo" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="Editora"></label>
+    <input asp-for="Editora" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="DataPublicacao"></label>
+    <input asp-for="DataPublicacao" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="Tipo"></label>
+    <select asp-for="Tipo" class="form-control" asp-items="@Html.GetEnumSelectList<Tipo>()">
+        <option>Selecione</option>
+    </select>
+</div>
+<div class="form-group">
+    <label asp-for="Condicao"></label>
+    <input asp-for="Condicao" />
+</div>
+<div class="form-group">
+    <label asp-for="Preco"></label>
+    <input asp-for="Preco" class="form-control" />
+</div>

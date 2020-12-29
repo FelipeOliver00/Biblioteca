@@ -1,0 +1,20 @@
+﻿@model Livro
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h1>Cadastrando Livro - BibliotecaF</h1>
+@if (TempData["msg"] != null)
+{
+<div class="alert alert-success">
+    @TempData["msg"]
+</div>
+}
+<form asp-action="Cadastrar" asp-controller="Livro">
+    <!--Para evitar código duplicado em cadastrar e editar-->
+    <partial name="_Formulario" />
+
+    <input type="submit" value="Cadastrar" class="btn btn-outline-primary" />
+    <a asp-action="index" class="btn btn-outline-dark">Livros</a>
+</form>
+
